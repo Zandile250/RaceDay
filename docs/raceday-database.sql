@@ -1,8 +1,8 @@
-/* ============================================================
+/* 
    RaceDay Database Script
    Part 1, Section C — matches the ERD in erd.png exactly.
    Target: SQL Server (run in SSMS)
-   ============================================================ */
+   */
 
 IF DB_ID('RaceDayDB') IS NULL
 BEGIN
@@ -13,10 +13,10 @@ GO
 USE RaceDayDB;
 GO
 
-/* ------------------------------------------------------------
+/*
    Drop tables if they already exist (child -> parent order)
    so this script can be re-run cleanly during development.
-   ------------------------------------------------------------ */
+  */
 IF OBJECT_ID('dbo.Results', 'U') IS NOT NULL DROP TABLE dbo.Results;
 IF OBJECT_ID('dbo.Enrolments', 'U') IS NOT NULL DROP TABLE dbo.Enrolments;
 IF OBJECT_ID('dbo.Categories', 'U') IS NOT NULL DROP TABLE dbo.Categories;
