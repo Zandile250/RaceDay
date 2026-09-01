@@ -1,8 +1,8 @@
-/* ============================================================
+/* 
    RaceDay Database Script
    Part 1, Section C — matches the ERD in erd.png exactly.
    Target: SQL Server (run in SSMS)
-   ============================================================ */
+   */
 
 IF DB_ID('RaceDayDB') IS NULL
 BEGIN
@@ -13,10 +13,10 @@ GO
 USE RaceDayDB;
 GO
 
-/* ------------------------------------------------------------
+/*
    Drop tables if they already exist (child -> parent order)
    so this script can be re-run cleanly during development.
-   ------------------------------------------------------------ */
+  */
 IF OBJECT_ID('dbo.Results', 'U') IS NOT NULL DROP TABLE dbo.Results;
 IF OBJECT_ID('dbo.Enrolments', 'U') IS NOT NULL DROP TABLE dbo.Enrolments;
 IF OBJECT_ID('dbo.Categories', 'U') IS NOT NULL DROP TABLE dbo.Categories;
@@ -26,6 +26,10 @@ IF OBJECT_ID('dbo.Roles', 'U') IS NOT NULL DROP TABLE dbo.Roles;
 GO
 
 /*    TABLE: Roles
+   Lookup table for the two system roles (Organiser, Participant).
+   Separate from users to control role values
+   Consistent (not free text that may be typed in different ways)
+   each time
    */
 CREATE TABLE dbo.Roles (
     RoleId      INT IDENTITY(1,1) PRIMARY KEY,
@@ -34,7 +38,11 @@ CREATE TABLE dbo.Roles (
 GO
 
 /* 
-   TABLE: Users
+   TABLE: 
+   Users
+   Stores Organisers and Participants in a single table —
+   The type of user each row is is determined by the value in the RoleId column.
+   There are two levels of permissions: the API level and the user level, and what they have at each level that you'll learn about in Part 2.
    */
 CREATE TABLE dbo.Users (
     UserId          INT IDENTITY(1,1) PRIMARY KEY,
@@ -50,6 +58,10 @@ CREATE TABLE dbo.Users (
 GO
 
 /*    TABLE: Events
+   A road event that is created by the Organiser (OrganiserId points back)
+   to Users). The weather is live and it's displayed in a different format.The weather is live and is displayed in another format.
+   Part 3 fetches from an external API, this is not stored here.
+   The link to an image in Azure Blob Storage will be stored in the ImageUrl field.
     */
 
 CREATE TABLE dbo.Events (
@@ -68,6 +80,9 @@ CREATE TABLE dbo.Events (
 GO
 
 /*    TABLE: Categories
+   The various distances/those which are priced at different levels within one Event
+   (e.g. 10km, 21km, 42km). Each category is assigned to one.
+   Event — One to Many relationship between Events and Categories.
    */
 
 CREATE TABLE dbo.Categories (
@@ -84,6 +99,11 @@ GO
 
 /*
    TABLE: Enrolments
+   Records when a Participant enters a Category. Kept as
+   Its own table (not a plain link) as it requires its
+   Some of the attributes are own: EnrolmentDate and Status. The UNIQUE constraint
+   To prevent a player to be registered for the same category, use below.
+   twice, without having to disable other enrollments at the same time
     */
 
 CREATE TABLE dbo.Enrolments (
@@ -101,7 +121,11 @@ CREATE TABLE dbo.Enrolments (
 GO
 
 /* 
-   TABLE: Results  (one-to-one with Enrolments)
+   TABLE: Results (one-to-one with Enrolments)
+   A result is only obtained if it is a race and if an
+   Organiser captures it, it is not included in Enrolments.
+   As columns not on it. The UNIQUE constraint on
+   EnrolmentId requires that there be at least one result for each enrolment.
     */
 
 CREATE TABLE dbo.Results (
@@ -118,6 +142,9 @@ GO
 
 /* 
    SEED DATA
+   Collect samples to test the schema right away:
+   3 Events include 2 Organisers and 2 Participants, categories for each.
+   Enrolments of samples + results as requested in the brief for event.
     */
 
 -- Roles
