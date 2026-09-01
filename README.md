@@ -16,6 +16,7 @@ Organiser — create, edit and delete events, manage event categories, capture r
 Participant — registers and logs in, views events, enters an event by selecting a category and sees their result history.
 
 Project Structure
+
 RaceDay/
 ├── docs/                          # Part 1 planning documents
 │   ├── erd.pdf                    # Entity Relationship Diagram
@@ -26,6 +27,7 @@ RaceDay/
 ├── .github/workflows/             # GitHub Actions CI/CD
 │   └── validate-structure.yml     # Validates /docs contains the required Part 1 files
 └── README.md
+
 CI/CD
 
 A GitHub Actions workflow runs automatically on every push to main, validating that the /docs folder exists and contains the required Part 1 deliverables (ERD, API endpoint plan, SQL script).
