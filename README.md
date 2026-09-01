@@ -1,6 +1,5 @@
 Race Day for South African resident
 
-RaceDay
 
 RaceDay, a full stack, web based, event management system, has been designed for the South African road running, walking and cycling community. It enables Event Organisers to create and manage events, categories and results; Participants can browse events, enter into categories and view their own results and registration history.
 
@@ -31,6 +30,8 @@ RaceDay/
 CI/CD
 
 A GitHub Actions workflow runs automatically on every push to main, validating that the /docs folder exists and contains the required Part 1 deliverables (ERD, API endpoint plan, SQL script).
+
+Latest successful run:
 
 <img width="902" height="344" alt="image" src="https://github.com/user-attachments/assets/3cc36dad-4609-4536-ad20-aa7e8898f522" />
 
