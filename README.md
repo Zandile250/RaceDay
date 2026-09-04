@@ -35,6 +35,12 @@ Latest successful run:
 
 <img width="902" height="344" alt="image" src="https://github.com/user-attachments/assets/3cc36dad-4609-4536-ad20-aa7e8898f522" />
 
+Video Walkthrough
+
+An unlisted YouTube video walking through the planning documents, ERD design decisions, endpoint plan choices, and a live run of the SQL script in SSMS
+
+https://youtu.be/xdjm51W98v8
+
 
 
 
