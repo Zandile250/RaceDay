@@ -2,9 +2,9 @@ name: RaceDay CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, part-2 ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, part-2 ]
 
 jobs:
   build-and-test:
