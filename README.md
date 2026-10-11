@@ -37,3 +37,9 @@ Stop everything with `docker compose down`.
     dotnet test RaceDay.Tests/RaceDay.Tests.csproj
 
 GitHub Actions restores, builds and runs the unit tests on every push to `main`.
+
+## CI build status
+
+Successful GitHub Actions run (build and all unit tests passing):
+
+![GitHub Actions green build](docs/screenshots/github-actions.png)
